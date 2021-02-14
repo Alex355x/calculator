@@ -1,5 +1,5 @@
 .button-wrapper {
-  height: 3em;
+  height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,11 +7,11 @@
   font-size: 1.4em;
   background-color: #f6f7fc;
   flex: 1;
-  border: 1px solid #000000;
+  border: 2px solid #000000;
   margin: 0.5em;
 }
 
 .operator {
-  border: 1px solid #fe9241;
+  border: 2px solid #fe9241;
 }
 

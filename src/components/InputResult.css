@@ -1,16 +1,8 @@
 .inputResult {
-  height: 1.6em;
+  height: 60px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
-  font-size: 1.6em;
-  background-color: #ffffff;
+  font-size: 1em;
   color: rgb(184, 182, 182);
-  padding: 0.5em;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #000000;
-  border-bottom: 1px solid #000000;
-  margin: 0 0.5em 1em;
-  /* outline: 1px solid #888888; */
 }

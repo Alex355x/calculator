@@ -8,25 +8,38 @@ import { ButtonEval } from './components/ButtonEval';
 import * as math from "mathjs";
 
 function App() {
-
   const [stateInput, setStateInput] = useState('');
   const [stateInputResult, setStateInputResult] = useState('');
   const [inputResultView, setInputResultView] = useState(true);
 
   const operator = val => {
-    return val === "+" || val === "-" || val === "/" || val === "*";
+    return val === "+" || val === "-" || val === "/" || val === "*" || val === "%";
   }
-
+  
   const addToInput = val => {
     if (!inputResultView) {
        setInputResultView(true)
     }
     if (operator(val)) {
+      if (val.includes("%")) {
+        let tmp = stateInput.split(/[/*%+-]/);
+        let [smoothOperator] = stateInput.split(/[0-9]/).join('').split('');
+        let percents = tmp[0] / 100 * tmp[1];
+        if (smoothOperator === "*") {
+          setStateInputResult(`${percents}`);
+        } else if (smoothOperator === "/") {
+          setStateInputResult((math.evaluate(tmp[0]/`${percents}`)).toString());
+        } else {
+        setStateInputResult((math.evaluate(tmp[0] + smoothOperator + `${percents}`)).toString());
+        setStateInput((stateInput).toString());
+        }
+      } else {
       setStateInputResult((stateInputResult + val).toString())
       setStateInput((stateInput + val).toString())
+      }
     } else {
-      setStateInputResult(math.evaluate(stateInputResult + val).toString())
-      setStateInput((stateInputResult + val).toString());
+      setStateInputResult(math.evaluate(stateInput + val).toString())
+      setStateInput((stateInput + val).toString());
     }
   }
 
@@ -35,26 +48,25 @@ function App() {
   }
 
   const handleEqual = () => {
-
     setStateInput(stateInputResult.toString());
-    setInputResultView(false)
-    // setStateInputResult('');
+    setInputResultView(false);
   }
 
   return (
     <div className="app">
       <div className="calc-wrapper">
-        <Input input={stateInput}></Input>
-        <InputResult inputResult={
-          inputResultView
-          ?
-          operator(stateInputResult.charAt(stateInputResult?.length -1)) ?
-          stateInputResult.slice(0, -1)
-          : stateInputResult
-          : null
-        }>
-
-        </InputResult>
+        <div className="inputContainer">
+          <Input input={stateInput}></Input>
+          <InputResult
+            inputResult={
+              inputResultView
+              ? operator(stateInputResult.charAt(stateInputResult?.length -1))
+                ? stateInputResult.slice(0, -1)
+                : stateInputResult
+              : null}
+          >
+          </InputResult>
+        </div>
         <div className="row">
           <ClearButton handleClear={() => {setStateInput(''); setStateInputResult('');}}>AC</ClearButton>
           <Button handleClick={deleteFromInput}>DEL</Button>
@@ -90,6 +102,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

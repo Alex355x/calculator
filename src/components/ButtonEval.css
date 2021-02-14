@@ -1,13 +1,13 @@
 .buttonEval {
-  height: 3em;
   display: flex;
+  height: 80px;
+  width: 18em;
+  margin: 0.5em;
   justify-content: center;
   align-items: center;
   font-weight: lighter;
   font-size: 1.4em;
   background-color: #fe9241;
   flex: 1;
-  outline: 1px solid black;
-  margin: 0.5em;
-  width: 18em;
+  outline: 2px solid black;
 }

@@ -1,13 +1,9 @@
 .input {
-  height: 1.6em;
   display: flex;
+  height: 70px;
   justify-content: flex-end;
   align-items: center;
   font-size: 1.6em;
-  background-color: #ffffff;
+  font-weight: 500;
   color: #000000;
-  padding: 0 0.5em;
-  border: 1px solid #000000;
-  border-bottom: none;
-  margin: 0 0.5em;
 }

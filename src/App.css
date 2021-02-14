@@ -1,17 +1,30 @@
 .app {
   display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
-  overflow-y: auto;
 }
 
 .calc-wrapper {
   width: 22%;
-  /* height: 590px; */
+  height: 690px;
+  min-width: 300px;
   background-color: rgb(172, 215, 235);
   padding: 1.6em;
-  border: 1px solid #000000;
+  border: 2px solid #000000;
+  margin: 40px auto;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 88%;
+  height: 120px;
+  justify-content: flex-end;
+  font-size: 1.6em;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 0.4em 0.6em;
+  border: 2px solid #000000;
+  margin: 0 auto 0.8em;
 }
 
 .row {
