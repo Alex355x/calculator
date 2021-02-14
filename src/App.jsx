@@ -1,4 +1,4 @@
-import {React, useState, useEffect } from 'react';
+import {React, useState } from 'react';
 import './App.css';
 import { Button } from './components/Button';
 import { Input } from './components/Input';
@@ -11,22 +11,22 @@ function App() {
 
   const [stateInput, setStateInput] = useState('');
   const [stateInputResult, setStateInputResult] = useState('');
-  const [input2View, setInput2View] = useState(true);
+  const [inputResultView, setInputResultView] = useState(true);
 
   const operator = val => {
     return val === "+" || val === "-" || val === "/" || val === "*";
   }
 
   const addToInput = val => {
-    // setStateInputResult(stateInput + val);
+    if (!inputResultView) {
+       setInputResultView(true)
+    }
     if (operator(val)) {
-      setStateInputResult(stateInputResult + val)
-      setStateInput(stateInput + val)
-
+      setStateInputResult((stateInputResult + val).toString())
+      setStateInput((stateInput + val).toString())
     } else {
       setStateInputResult(math.evaluate(stateInputResult + val).toString())
-      setStateInput(math.evaluate(stateInputResult + val).toString());
-      setInput2View(!input2View);
+      setStateInput((stateInputResult + val).toString());
     }
   }
 
@@ -35,10 +35,10 @@ function App() {
   }
 
   const handleEqual = () => {
-    // setStateInputResult(math.evaluate(stateInput));
-    // setStateInput('');
 
-    setStateInputResult('');
+    setStateInput(stateInputResult.toString());
+    setInputResultView(false)
+    // setStateInputResult('');
   }
 
   return (
@@ -46,10 +46,13 @@ function App() {
       <div className="calc-wrapper">
         <Input input={stateInput}></Input>
         <InputResult inputResult={
-
+          inputResultView
+          ?
           operator(stateInputResult.charAt(stateInputResult?.length -1)) ?
           stateInputResult.slice(0, -1)
-          : stateInputResult}>
+          : stateInputResult
+          : null
+        }>
 
         </InputResult>
         <div className="row">
